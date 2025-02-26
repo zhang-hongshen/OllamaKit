@@ -9,7 +9,7 @@ import Foundation
 
 /// A structure that encapsulates the data required for generating responses using the Ollama API.
 public struct GenerateRequest: Encodable {
-    private let stream: Bool
+    public var stream: Bool
     
     /// A string representing the identifier of the model.
     public let model: String
@@ -29,8 +29,8 @@ public struct GenerateRequest: Encodable {
     /// Optional ``CompletionOptions`` providing additional configuration for the generation request.
     public var options: CompletionOptions?
     
-    public init(model: String, prompt: String, images: [String] = []) {
-        self.stream = true
+    public init(stream: Bool = true, model: String, prompt: String, images: [String] = []) {
+        self.stream = stream
         self.model = model
         self.prompt = prompt
         self.images = images

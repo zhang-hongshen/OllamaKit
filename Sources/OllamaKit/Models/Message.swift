@@ -9,7 +9,7 @@ import Foundation
 
 /// A structure that represents a single message in the chat request.
 public struct Message: Codable {
-    /// A ``Role`` value indicating the sender of the message (system, assistant, user).
+    /// A ``Role`` value indicating the sender of the message (system, assistant, user, tool).
     public let role: Role
     
     /// A string containing the message's content.
@@ -18,10 +18,15 @@ public struct Message: Codable {
     /// An optional array of base64-encoded images.
     public let images: [String]?
     
-    public init(role: Role, content: String, images: [String] = []) {
+    /// An optional array of tools in JSON that the model wants to use
+    public let toolCalls: [String]?
+    
+    public init(role: Role, content: String,
+                images: [String] = [], toolCalls: [String] = []) {
         self.role = role
         self.content = content
         self.images = images
+        self.toolCalls = toolCalls
     }
     
     /// An enumeration that represents the role of the message sender.
@@ -34,5 +39,8 @@ public struct Message: Codable {
         
         /// Indicates the message is from the user.
         case user
+        
+        /// Indicates the message is about tool.
+        case tool
     }
 }

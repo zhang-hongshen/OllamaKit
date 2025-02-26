@@ -54,4 +54,13 @@ extension OllamaClient {
         
         return subject.eraseToAnyPublisher()
     }
+    
+    
+    public func chat(_ data: ChatRequest) async throws -> ChatResponse {
+        var requestData = data
+        requestData.stream = false
+        let request = AF.request(router.chat(data: requestData)).validate()
+        let response = request.serializingDecodable(ChatResponse.self, decoder: decoder)
+        return try await response.value
+    }
 }

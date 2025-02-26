@@ -54,4 +54,12 @@ extension OllamaClient {
         
         return subject.eraseToAnyPublisher()
     }
+    
+    public func generate(data: GenerateRequest) async throws -> GenerateResponse {
+        var requestData = data
+        requestData.stream = false
+        let request = AF.request(router.generate(data: requestData)).validate()
+        let response = request.serializingDecodable(GenerateResponse.self, decoder: decoder)
+        return try await response.value
+    }
 }
