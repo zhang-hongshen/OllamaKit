@@ -32,6 +32,3 @@ public struct OllamaClient {
     
 }
 
-extension OllamaClient {
-    public static let shared = OllamaClient(baseURL: URL(string: ProcessInfo.processInfo.environment["OLLAMA_HOST"] ?? "http://localhost:11434")!)
-}

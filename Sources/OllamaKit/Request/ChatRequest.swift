@@ -23,11 +23,14 @@ public struct ChatRequest: Encodable {
     /// Optional ``CompletionOptions`` providing additional configuration for the chat request.
     public var options: CompletionOptions?
     
-    public init(stream: Bool = true, model: String, messages: [Message], tools: [String] = []) {
+    public init(stream: Bool = true, model: String,
+                messages: [Message], tools: [String] = [],
+                options: CompletionOptions? = nil) {
         self.stream = stream
         self.model = model
         self.messages = messages
         self.tools = tools
+        self.options = options
     }
     
 }

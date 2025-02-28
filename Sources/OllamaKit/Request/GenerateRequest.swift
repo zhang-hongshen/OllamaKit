@@ -29,10 +29,13 @@ public struct GenerateRequest: Encodable {
     /// Optional ``CompletionOptions`` providing additional configuration for the generation request.
     public var options: CompletionOptions?
     
-    public init(stream: Bool = true, model: String, prompt: String, images: [String] = []) {
+    public init(stream: Bool = true, model: String,
+                prompt: String, images: [String] = [],
+                options: CompletionOptions? = nil) {
         self.stream = stream
         self.model = model
         self.prompt = prompt
         self.images = images
+        self.options = options
     }
 }

@@ -261,12 +261,6 @@ extension OllamaClient {
             .compactMap{ ModelInfo(name: $0) } ?? []
     }
     
-//    public func undownloadedModels() async throws -> [ModelInfo] {
-//        let downloadedModels = try await models().models.map{ $0.name }
-//        let libraryModels = try await libraryModels()
-//        return libraryModels.filter{ !downloadedModels.contains( $0.name )  }
-//    }
-    
     public func modelTags(_ name: String) async throws -> [ModelInfo] {
         let html = await withCheckedContinuation { continuation in
             AF.request(router.modelTags(data: name))
